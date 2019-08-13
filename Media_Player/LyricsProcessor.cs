@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Net.Http;
 using Newtonsoft.Json.Linq;
+using WMPLib;
 
 namespace Media_Player
 {
@@ -12,7 +13,7 @@ namespace Media_Player
     public class LyricsProcessor
     {
       
-        public static async Task<SongModel> GetSongDataAsync(string songName, string artistName)
+        public static async Task<SongModel> GetSongDataAsync(string songName, string artistName, IWMPMedia mediaFile)
         {
             string url = "";
             
@@ -39,6 +40,8 @@ namespace Media_Player
                  //   var srchItem = songArray.SelectTokens("$.[?(@.artist=='Journey')]").First();
 
                     SongModel song = srchItem.ToObject<SongModel>();
+                    song.MediaFile = mediaFile;
+                 //   song.FileLocation = filePath;
 
                     //Console.WriteLine(songSample.Song);
                     //Console.WriteLine(songSample.SongLink);
