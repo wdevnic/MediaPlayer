@@ -29,28 +29,14 @@ namespace Media_Player
                 {
                     
                     string content = await response.Content.ReadAsStringAsync();
-                    Console.WriteLine(content);
 
                     JObject songData = JObject.Parse(content);
                     JArray songArray = (JArray)songData["result"];
                     var srchItem = songArray.SelectTokens("$.[?(@.artist== '" + artistName + "')]").First();
 
-             //       Console.WriteLine("$.[?(@.artist== '" + artistName + "')]");
-
-                 //   var srchItem = songArray.SelectTokens("$.[?(@.artist=='Journey')]").First();
-
                     SongModel song = srchItem.ToObject<SongModel>();
                     song.MediaFile = mediaFile;
-                 //   song.FileLocation = filePath;
 
-                    //Console.WriteLine(songSample.Song);
-                    //Console.WriteLine(songSample.SongLink);
-
-                    //Console.WriteLine(songSample.Artist);
-                    //Console.WriteLine(songSample.ArtistLink);
-
-                    //Console.WriteLine(songSample.Album);
-                    //Console.WriteLine(songSample.AlbumLink);
 
                     return song;
                 }

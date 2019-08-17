@@ -36,8 +36,8 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.playlistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openPlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.savePlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deletePlaylistToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.lyricsTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.lyricsPanel = new System.Windows.Forms.Panel();
@@ -45,8 +45,10 @@
             this.linkLabel = new System.Windows.Forms.LinkLabel();
             this.mediaPlayPanel = new System.Windows.Forms.Panel();
             this.playListTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
-            this.playlistListBox = new System.Windows.Forms.ListBox();
+            this.libraryListBox = new System.Windows.Forms.ListBox();
             this.playListLabel = new System.Windows.Forms.Label();
+            this.playlistListBox = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.MediaPlayer)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.mainTableLayoutPanel.SuspendLayout();
@@ -66,6 +68,7 @@
             this.MediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MediaPlayer.OcxState")));
             this.MediaPlayer.Size = new System.Drawing.Size(715, 559);
             this.MediaPlayer.TabIndex = 0;
+            this.MediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MediaPlayer_PlayStateChange);
             // 
             // menuStrip
             // 
@@ -91,44 +94,46 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // playlistToolStripMenuItem
             // 
             this.playlistToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newPlaylistToolStripMenuItem,
-            this.openPlaylistToolStripMenuItem});
+            this.savePlaylistToolStripMenuItem,
+            this.deletePlaylistToolStripMenuItem});
             this.playlistToolStripMenuItem.Name = "playlistToolStripMenuItem";
             this.playlistToolStripMenuItem.Size = new System.Drawing.Size(56, 20);
             this.playlistToolStripMenuItem.Text = "Playlist";
             // 
-            // newPlaylistToolStripMenuItem
+            // savePlaylistToolStripMenuItem
             // 
-            this.newPlaylistToolStripMenuItem.Name = "newPlaylistToolStripMenuItem";
-            this.newPlaylistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.newPlaylistToolStripMenuItem.Text = "New";
+            this.savePlaylistToolStripMenuItem.Name = "savePlaylistToolStripMenuItem";
+            this.savePlaylistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.savePlaylistToolStripMenuItem.Text = "Save";
+            this.savePlaylistToolStripMenuItem.Click += new System.EventHandler(this.savePlaylistToolStripMenuItem_Click);
             // 
-            // openPlaylistToolStripMenuItem
+            // deletePlaylistToolStripMenuItem
             // 
-            this.openPlaylistToolStripMenuItem.Name = "openPlaylistToolStripMenuItem";
-            this.openPlaylistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.openPlaylistToolStripMenuItem.Text = "Open";
+            this.deletePlaylistToolStripMenuItem.Name = "deletePlaylistToolStripMenuItem";
+            this.deletePlaylistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deletePlaylistToolStripMenuItem.Text = "Delete";
+            this.deletePlaylistToolStripMenuItem.Click += new System.EventHandler(this.deletePlaylistToolStripMenuItem_Click);
             // 
             // mainTableLayoutPanel
             // 
@@ -222,30 +227,34 @@
             this.playListTableLayoutPanel.BackColor = System.Drawing.SystemColors.Menu;
             this.playListTableLayoutPanel.ColumnCount = 1;
             this.playListTableLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.playListTableLayoutPanel.Controls.Add(this.libraryListBox, 0, 3);
             this.playListTableLayoutPanel.Controls.Add(this.playListLabel, 0, 0);
             this.playListTableLayoutPanel.Controls.Add(this.playlistListBox, 0, 1);
+            this.playListTableLayoutPanel.Controls.Add(this.label1, 0, 2);
             this.playListTableLayoutPanel.Location = new System.Drawing.Point(551, -2);
             this.playListTableLayoutPanel.Margin = new System.Windows.Forms.Padding(0);
             this.playListTableLayoutPanel.Name = "playListTableLayoutPanel";
-            this.playListTableLayoutPanel.RowCount = 2;
-            this.playListTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.061895F));
-            this.playListTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 95.9381F));
+            this.playListTableLayoutPanel.RowCount = 4;
+            this.playListTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.061818F));
+            this.playListTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.93913F));
+            this.playListTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 4.059923F));
+            this.playListTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 45.93913F));
             this.playListTableLayoutPanel.Size = new System.Drawing.Size(168, 516);
             this.playListTableLayoutPanel.TabIndex = 3;
             // 
-            // playlistListBox
+            // libraryListBox
             // 
-            this.playlistListBox.BackColor = System.Drawing.SystemColors.Menu;
-            this.playlistListBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.playlistListBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.playlistListBox.FormattingEnabled = true;
-            this.playlistListBox.IntegralHeight = false;
-            this.playlistListBox.Location = new System.Drawing.Point(0, 20);
-            this.playlistListBox.Margin = new System.Windows.Forms.Padding(0);
-            this.playlistListBox.Name = "playlistListBox";
-            this.playlistListBox.Size = new System.Drawing.Size(168, 496);
-            this.playlistListBox.TabIndex = 1;
-            this.playlistListBox.SelectedIndexChanged += new System.EventHandler(this.playlistListBox_SelectedIndexChanged);
+            this.libraryListBox.BackColor = System.Drawing.SystemColors.Menu;
+            this.libraryListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.libraryListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.libraryListBox.FormattingEnabled = true;
+            this.libraryListBox.IntegralHeight = false;
+            this.libraryListBox.Location = new System.Drawing.Point(0, 277);
+            this.libraryListBox.Margin = new System.Windows.Forms.Padding(0);
+            this.libraryListBox.Name = "libraryListBox";
+            this.libraryListBox.Size = new System.Drawing.Size(168, 239);
+            this.libraryListBox.TabIndex = 4;
+            this.libraryListBox.Click += new System.EventHandler(this.libraryListBox_Click);
             // 
             // playListLabel
             // 
@@ -253,13 +262,44 @@
             this.playListLabel.BackColor = System.Drawing.SystemColors.Menu;
             this.playListLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.playListLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.playListLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.playListLabel.Location = new System.Drawing.Point(0, 3);
             this.playListLabel.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
             this.playListLabel.Name = "playListLabel";
             this.playListLabel.Size = new System.Drawing.Size(168, 17);
             this.playListLabel.TabIndex = 2;
-            this.playListLabel.Text = "Drag Music below";
+            this.playListLabel.Text = "Unsaved Playlist";
             this.playListLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // playlistListBox
+            // 
+            this.playlistListBox.BackColor = System.Drawing.SystemColors.Menu;
+            this.playlistListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.playlistListBox.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.playlistListBox.FormattingEnabled = true;
+            this.playlistListBox.IntegralHeight = false;
+            this.playlistListBox.Location = new System.Drawing.Point(0, 20);
+            this.playlistListBox.Margin = new System.Windows.Forms.Padding(0);
+            this.playlistListBox.Name = "playlistListBox";
+            this.playlistListBox.Size = new System.Drawing.Size(168, 237);
+            this.playlistListBox.TabIndex = 1;
+            this.playlistListBox.Click += new System.EventHandler(this.playlistListBox_Click);
+            this.playlistListBox.SelectedIndexChanged += new System.EventHandler(this.playlistListBox_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.SystemColors.Menu;
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.FlatStyle = System.Windows.Forms.FlatStyle.System;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 260);
+            this.label1.Margin = new System.Windows.Forms.Padding(0, 3, 0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(168, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Playlist Library";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // MainForm
             // 
@@ -273,6 +313,7 @@
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MP3 Player";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.MediaPlayer)).EndInit();
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
@@ -302,12 +343,14 @@
         private System.Windows.Forms.WebBrowser webBrowserLyrics;
         private System.Windows.Forms.LinkLabel linkLabel;
         private System.Windows.Forms.ToolStripMenuItem playlistToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newPlaylistToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openPlaylistToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem savePlaylistToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deletePlaylistToolStripMenuItem;
         private System.Windows.Forms.ListBox playlistListBox;
         private System.Windows.Forms.Panel mediaPlayPanel;
         private System.Windows.Forms.TableLayoutPanel playListTableLayoutPanel;
         private System.Windows.Forms.Label playListLabel;
+        private System.Windows.Forms.ListBox libraryListBox;
+        private System.Windows.Forms.Label label1;
     }
 }
 
