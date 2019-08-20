@@ -12,12 +12,12 @@ This project is an MP3 player that allows the creation, deletion and playing of 
 
 ## Screenshots
 
-### Home page
+### Player in Action
 
 ![](screenshot_images/MediaPlayer.PNG)
 
 ## Technologies
-C#, WMPLib, AXWMLib, JSON, REST API  
+C#, WMPLib, AXWMPLib, JSON, REST API  
 
 ## Status
 Error checking required
