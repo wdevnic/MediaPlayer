@@ -68,7 +68,7 @@
             this.MediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MediaPlayer.OcxState")));
             this.MediaPlayer.Size = new System.Drawing.Size(715, 559);
             this.MediaPlayer.TabIndex = 0;
-            this.MediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MediaPlayer_PlayStateChange);
+            this.MediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
             // 
             // menuStrip
             // 
@@ -124,14 +124,14 @@
             // savePlaylistToolStripMenuItem
             // 
             this.savePlaylistToolStripMenuItem.Name = "savePlaylistToolStripMenuItem";
-            this.savePlaylistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.savePlaylistToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.savePlaylistToolStripMenuItem.Text = "Save";
             this.savePlaylistToolStripMenuItem.Click += new System.EventHandler(this.savePlaylistToolStripMenuItem_Click);
             // 
             // deletePlaylistToolStripMenuItem
             // 
             this.deletePlaylistToolStripMenuItem.Name = "deletePlaylistToolStripMenuItem";
-            this.deletePlaylistToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deletePlaylistToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.deletePlaylistToolStripMenuItem.Text = "Delete";
             this.deletePlaylistToolStripMenuItem.Click += new System.EventHandler(this.deletePlaylistToolStripMenuItem_Click);
             // 
@@ -309,6 +309,7 @@
             this.ClientSize = new System.Drawing.Size(974, 589);
             this.Controls.Add(this.mainTableLayoutPanel);
             this.Controls.Add(this.menuStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
