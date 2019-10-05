@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.MediaPlayer = new AxWMPLib.AxWindowsMediaPlayer();
             this.menuStrip = new System.Windows.Forms.MenuStrip();
@@ -49,6 +50,8 @@
             this.playListLabel = new System.Windows.Forms.Label();
             this.playlistListBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.contextSongMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.MediaPlayer)).BeginInit();
             this.menuStrip.SuspendLayout();
             this.mainTableLayoutPanel.SuspendLayout();
@@ -56,6 +59,7 @@
             this.lyricsPanel.SuspendLayout();
             this.mediaPlayPanel.SuspendLayout();
             this.playListTableLayoutPanel.SuspendLayout();
+            this.contextSongMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // MediaPlayer
@@ -68,7 +72,7 @@
             this.MediaPlayer.OcxState = ((System.Windows.Forms.AxHost.State)(resources.GetObject("MediaPlayer.OcxState")));
             this.MediaPlayer.Size = new System.Drawing.Size(715, 559);
             this.MediaPlayer.TabIndex = 0;
-            this.MediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.mediaPlayer_PlayStateChange);
+            this.MediaPlayer.PlayStateChange += new AxWMPLib._WMPOCXEvents_PlayStateChangeEventHandler(this.MediaPlayer_PlayStateChange);
             // 
             // menuStrip
             // 
@@ -96,21 +100,21 @@
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
-            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.OpenToolStripMenuItem_Click);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.closeToolStripMenuItem.Text = "Close";
-            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.CloseToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.ExitToolStripMenuItem_Click);
             // 
             // playlistToolStripMenuItem
             // 
@@ -126,14 +130,14 @@
             this.savePlaylistToolStripMenuItem.Name = "savePlaylistToolStripMenuItem";
             this.savePlaylistToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.savePlaylistToolStripMenuItem.Text = "Save";
-            this.savePlaylistToolStripMenuItem.Click += new System.EventHandler(this.savePlaylistToolStripMenuItem_Click);
+            this.savePlaylistToolStripMenuItem.Click += new System.EventHandler(this.SavePlaylistToolStripMenuItem_Click);
             // 
             // deletePlaylistToolStripMenuItem
             // 
             this.deletePlaylistToolStripMenuItem.Name = "deletePlaylistToolStripMenuItem";
             this.deletePlaylistToolStripMenuItem.Size = new System.Drawing.Size(107, 22);
             this.deletePlaylistToolStripMenuItem.Text = "Delete";
-            this.deletePlaylistToolStripMenuItem.Click += new System.EventHandler(this.deletePlaylistToolStripMenuItem_Click);
+            this.deletePlaylistToolStripMenuItem.Click += new System.EventHandler(this.DeletePlaylistToolStripMenuItem_Click);
             // 
             // mainTableLayoutPanel
             // 
@@ -191,7 +195,7 @@
             this.webBrowserLyrics.ScriptErrorsSuppressed = true;
             this.webBrowserLyrics.Size = new System.Drawing.Size(248, 513);
             this.webBrowserLyrics.TabIndex = 0;
-            this.webBrowserLyrics.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserLyrics_DocumentCompleted);
+            this.webBrowserLyrics.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.WebBrowserLyrics_DocumentCompleted);
             // 
             // linkLabel
             // 
@@ -207,7 +211,7 @@
             this.linkLabel.TabStop = true;
             this.linkLabel.Text = "www.lyrics.com";
             this.linkLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabel1_LinkClicked);
+            this.linkLabel.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.LinkLabel1_LinkClicked);
             // 
             // mediaPlayPanel
             // 
@@ -254,7 +258,7 @@
             this.libraryListBox.Name = "libraryListBox";
             this.libraryListBox.Size = new System.Drawing.Size(168, 239);
             this.libraryListBox.TabIndex = 4;
-            this.libraryListBox.Click += new System.EventHandler(this.libraryListBox_Click);
+            this.libraryListBox.Click += new System.EventHandler(this.LibraryListBox_Click);
             // 
             // playListLabel
             // 
@@ -275,6 +279,7 @@
             // 
             this.playlistListBox.BackColor = System.Drawing.SystemColors.Menu;
             this.playlistListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.playlistListBox.ContextMenuStrip = this.contextSongMenuStrip;
             this.playlistListBox.Dock = System.Windows.Forms.DockStyle.Fill;
             this.playlistListBox.FormattingEnabled = true;
             this.playlistListBox.IntegralHeight = false;
@@ -283,8 +288,8 @@
             this.playlistListBox.Name = "playlistListBox";
             this.playlistListBox.Size = new System.Drawing.Size(168, 237);
             this.playlistListBox.TabIndex = 1;
-            this.playlistListBox.Click += new System.EventHandler(this.playlistListBox_Click);
-            this.playlistListBox.SelectedIndexChanged += new System.EventHandler(this.playlistListBox_SelectedIndexChanged);
+            this.playlistListBox.Click += new System.EventHandler(this.PlaylistListBox_Click);
+            this.playlistListBox.SelectedIndexChanged += new System.EventHandler(this.PlaylistListBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -300,6 +305,20 @@
             this.label1.TabIndex = 3;
             this.label1.Text = "Playlist Library";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // contextSongMenuStrip
+            // 
+            this.contextSongMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.deleteToolStripMenuItem});
+            this.contextSongMenuStrip.Name = "contextSongMenuStrip";
+            this.contextSongMenuStrip.Size = new System.Drawing.Size(181, 48);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            this.deleteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deleteToolStripMenuItem.Text = "Delete";
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -325,6 +344,7 @@
             this.mediaPlayPanel.ResumeLayout(false);
             this.playListTableLayoutPanel.ResumeLayout(false);
             this.playListTableLayoutPanel.PerformLayout();
+            this.contextSongMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -352,6 +372,8 @@
         private System.Windows.Forms.Label playListLabel;
         private System.Windows.Forms.ListBox libraryListBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ContextMenuStrip contextSongMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
     }
 }
 

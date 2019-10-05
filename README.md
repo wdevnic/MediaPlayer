@@ -20,4 +20,4 @@ This project is an MP3 player that allows the creation, deletion and playing of 
 C#, WMPLib, AXWMPLib, JSON, REST API  
 
 ## Status
-Error checking required
+Complete

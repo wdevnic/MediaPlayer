@@ -13,7 +13,7 @@ namespace Media_Player
         }
 
         // gets playlist name from lext box
-        private void saveButton_Click(object sender, EventArgs e)
+        private void SaveButton_Click(object sender, EventArgs e)
         {
             PlaylistName = fileNameTextBox.Text;
         }
